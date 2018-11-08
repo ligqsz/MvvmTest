@@ -44,6 +44,16 @@ public class LoginRepository extends BaseRepository {
                 emitter.onComplete();
             }
         });
+
+//        addDisposable(Observable.concat(checkInfo, login)
+//                .compose(RxSchedulers.<Integer>ioMain())
+//                .subscribeWith(new RxObservable<Integer>() {
+//                    @Override
+//                    protected void onSuccess(Integer integer) {
+//                        //...
+//                    }
+//                }));
+
         addDisposable(Observable.concat(checkInfo, login)
                 .compose(RxSchedulers.<Integer>ioMain())
                 .doOnSubscribe(new Consumer<Disposable>() {
