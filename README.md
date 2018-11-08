@@ -1,0 +1,3 @@
+# MvvmTest
+一个简单mvvm的Demo
+采用LiveData更新界面,DataBinding来绑定布局,ViewModel来保持与对应Activity同生共死
