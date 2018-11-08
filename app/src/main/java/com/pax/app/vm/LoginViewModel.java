@@ -17,4 +17,8 @@ public class LoginViewModel extends BaseViewModel<LoginRepository> {
     public void login(String username, String password) {
         mRepository.doLogin(username, password);
     }
+
+    public void queryAll() {
+        mRepository.queryAll();
+    }
 }

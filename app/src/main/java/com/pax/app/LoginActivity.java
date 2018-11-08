@@ -49,6 +49,7 @@ public class LoginActivity extends BaseActivity<LoginViewModel, LoginBinding> {
     protected void showFailed() {
         hideProgress();
         showToast("failed");
+        doQueryAll();
     }
 
     private void showToast(String msg) {
@@ -59,6 +60,11 @@ public class LoginActivity extends BaseActivity<LoginViewModel, LoginBinding> {
     protected void showSuccess() {
         hideProgress();
         showToast("success");
+        doQueryAll();
+    }
+
+    private void doQueryAll() {
+        mViewModel.queryAll();
     }
 
     @Override

@@ -27,3 +27,25 @@ l
 0app/src/main/java/com/pax/app/event/LiveBus.java,0\6\0645306b44da796e7b3c5eba238ae20e3bca1a13
 _
 /app/src/main/java/com/pax/app/BaseActivity.java,f\5\f57f781c94fed84239304b48f0907b6eebb7ee15
+e
+5app/src/main/java/com/pax/app/constant/Constants.java,8\d\8d456d6d512f2754e8740e2ead239b78dffb5ddf
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+b
+2app/src/main/java/com/pax/app/rx/RxSubscriber.java,7\d\7d34d1d1bcdeba2766ea6c1baf95c5514d65bbe0
+b
+2app/src/main/java/com/pax/app/rx/RxObservable.java,7\5\7516b407170fc3d8efdd7de1381c0077fb9951ba
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+V
+&app/src/main/java/com/pax/app/App.java,2\6\262578987d135fdb7f7686c9bb0bcd005fc6c907
+^
+.app/src/main/java/com/pax/app/utils/Utils.java,1\0\10c3670fda721f2fc1793cede233df448e3f6e56
+b
+2app/src/main/java/com/pax/app/db/BaseDatabase.java,6\b\6bc4bec46f73d128d8fa66d0439fbbe9baa3b997
+]
+-app/src/main/java/com/pax/app/db/UserDao.java,2\5\254d1d934edfaea98b6221e070dbf082d4a3f644
+Z
+*app/src/main/java/com/pax/app/db/User.java,c\6\c634ddd2d96e380876815ab913f5d19818838c4d
+<
+build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
