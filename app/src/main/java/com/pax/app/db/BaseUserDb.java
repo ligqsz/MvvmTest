@@ -9,6 +9,6 @@ import android.arch.persistence.room.RoomDatabase;
  * @date 2018/11/8 13:56
  */
 @Database(entities = {User.class}, version = 1)
-public abstract class BaseDatabase extends RoomDatabase {
+public abstract class BaseUserDb extends RoomDatabase {
     public abstract UserDao userDao();
 }

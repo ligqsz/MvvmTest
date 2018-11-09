@@ -3,6 +3,7 @@ package com.pax.app;
 import android.app.Application;
 
 import com.pax.app.utils.Utils;
+import com.pax.mvvm.utils.MvvmUtils;
 
 /**
  * @author ligq
@@ -13,5 +14,6 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         Utils.init(this);
+        MvvmUtils.init(this);
     }
 }

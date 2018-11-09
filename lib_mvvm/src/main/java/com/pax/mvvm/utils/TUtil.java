@@ -1,8 +1,6 @@
-package com.pax.app.utils;
+package com.pax.mvvm.utils;
 
 import android.support.annotation.NonNull;
-
-import com.pax.app.vm.BaseViewModel;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.Objects;
@@ -11,14 +9,14 @@ import java.util.Objects;
 /**
  * @author ligq
  */
-@SuppressWarnings({"unchecked", "unused"})
+@SuppressWarnings({"unchecked", "unused", "WeakerAccess"})
 public class TUtil {
     /**
-     * getInstance by object{@link com.pax.app.vm.BaseViewModel}
+     * getInstance by object
      *
-     * @param object obj{@link com.pax.app.vm.BaseViewModel}
+     * @param object obj
      * @param i      i
-     * @param <T>    {@link BaseViewModel#mRepository}
+     * @param <T>    T
      * @return T instance not class
      */
     public static <T> T getNewInstance(Object object, int i) {
@@ -35,11 +33,11 @@ public class TUtil {
     }
 
     /**
-     * getInstance by object{@link com.pax.app.vm.BaseViewModel}
+     * getInstance by object
      *
-     * @param object obj{@link com.pax.app.vm.BaseViewModel}
+     * @param object obj
      * @param i      i
-     * @param <T>    {@link BaseViewModel#mRepository}
+     * @param <T>    T
      * @return T class not instance
      */
     public static <T> T getInstance(Object object, int i) {
@@ -51,8 +49,8 @@ public class TUtil {
 
     }
 
-    public static @NonNull
-    <T> T checkNotNull(final T reference) {
+    @NonNull
+    public static <T> T checkNotNull(final T reference) {
         if (reference == null) {
             throw new NullPointerException();
         }

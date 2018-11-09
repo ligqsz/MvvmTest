@@ -6,11 +6,12 @@ import android.util.Log;
 
 import com.pax.app.constant.Constants;
 import com.pax.app.constant.States;
-import com.pax.app.db.BaseDatabase;
-import com.pax.app.db.DataBaseUtils;
+import com.pax.app.db.BaseUserDb;
+import com.pax.app.db.DbUtils;
 import com.pax.app.db.User;
-import com.pax.app.rx.RxObservable;
-import com.pax.app.rx.RxSchedulers;
+import com.pax.mvvm.base.BaseRepository;
+import com.pax.mvvm.rx.BaseRxObservable;
+import com.pax.mvvm.rx.RxSchedulers;
 
 import java.util.List;
 import java.util.Random;
@@ -44,7 +45,7 @@ public class LoginRepository extends BaseRepository {
         Observable<Integer> insertDb = Observable.create(new ObservableOnSubscribe<Integer>() {
             @Override
             public void subscribe(ObservableEmitter<Integer> emitter) {
-                BaseDatabase db = DataBaseUtils.getDataBase(BaseDatabase.class, "test_db");
+                BaseUserDb db = DbUtils.getDataBase(BaseUserDb.class, "test_db");
                 User user = new User(username, pwd);
                 db.userDao().insertAll(user);
                 emitter.onComplete();
@@ -105,7 +106,7 @@ public class LoginRepository extends BaseRepository {
         addDisposable(Observable.create(new ObservableOnSubscribe<List<User>>() {
             @Override
             public void subscribe(ObservableEmitter<List<User>> emitter) {
-                List<User> all = DataBaseUtils.getDataBase(BaseDatabase.class, "test_db")
+                List<User> all = DbUtils.getDataBase(BaseUserDb.class, "test_db")
                         .userDao()
                         .getAll();
                 emitter.onNext(all);
@@ -113,7 +114,7 @@ public class LoginRepository extends BaseRepository {
             }
         })
                 .compose(RxSchedulers.<List<User>>ioMain())
-                .subscribeWith(new RxObservable<List<User>>() {
+                .subscribeWith(new BaseRxObservable<List<User>>() {
                     @Override
                     protected void onSuccess(List<User> users) {
                         for (User user : users) {

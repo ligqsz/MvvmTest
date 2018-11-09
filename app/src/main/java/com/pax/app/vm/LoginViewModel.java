@@ -4,6 +4,7 @@ import android.app.Application;
 import android.support.annotation.NonNull;
 
 import com.pax.app.repository.LoginRepository;
+import com.pax.mvvm.base.BaseViewModel;
 
 /**
  * @author ligq

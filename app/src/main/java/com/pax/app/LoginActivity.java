@@ -1,6 +1,8 @@
 package com.pax.app;
 
+import android.arch.lifecycle.Observer;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.Toast;
 import com.pax.app.constant.Constants;
 import com.pax.app.constant.States;
 import com.pax.app.vm.LoginViewModel;
+import com.pax.mvvm.base.BaseActivity;
 import com.pax.mvvmtest.LoginBinding;
 import com.pax.mvvmtest.R;
 
@@ -33,19 +36,16 @@ public class LoginActivity extends BaseActivity<LoginViewModel, LoginBinding> {
         }
     };
 
-    @Override
     protected void showLoading() {
         mDataBinding.loginProgress.setVisibility(View.VISIBLE);
         mDataBinding.loginForm.setVisibility(View.GONE);
     }
 
-    @Override
     protected void showError() {
         hideProgress();
         showToast("error");
     }
 
-    @Override
     protected void showFailed() {
         hideProgress();
         showToast("failed");
@@ -56,7 +56,6 @@ public class LoginActivity extends BaseActivity<LoginViewModel, LoginBinding> {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
     protected void showSuccess() {
         hideProgress();
         showToast("success");
@@ -67,7 +66,6 @@ public class LoginActivity extends BaseActivity<LoginViewModel, LoginBinding> {
         mViewModel.queryAll();
     }
 
-    @Override
     protected void showElse(Integer integer) {
         hideProgress();
         if (integer == States.INVALID_PWD) {
@@ -83,6 +81,30 @@ public class LoginActivity extends BaseActivity<LoginViewModel, LoginBinding> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initView();
+    }
+
+    @Override
+    protected Observer getObserver() {
+        return new Observer<Integer>() {
+            @Override
+            public void onChanged(@Nullable Integer integer) {
+                if (integer == null) {
+                    showError();
+                    return;
+                }
+                if (States.SUCCESS == integer) {
+                    showSuccess();
+                } else if (integer == States.FAILED) {
+                    showFailed();
+                } else if (integer == States.LOADING) {
+                    showLoading();
+                } else if (integer != States.ERROR) {
+                    showElse(integer);
+                } else {
+                    showError();
+                }
+            }
+        };
     }
 
     @Override

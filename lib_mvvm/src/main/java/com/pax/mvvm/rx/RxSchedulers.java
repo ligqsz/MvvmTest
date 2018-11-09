@@ -1,4 +1,4 @@
-package com.pax.app.rx;
+package com.pax.mvvm.rx;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -10,6 +10,7 @@ import io.reactivex.schedulers.Schedulers;
  * @author ligq
  * @date 2018/11/7 14:00
  */
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class RxSchedulers {
     public static <T> ObservableTransformer<T, T> ioMain() {
         return new ObservableTransformer<T, T>() {

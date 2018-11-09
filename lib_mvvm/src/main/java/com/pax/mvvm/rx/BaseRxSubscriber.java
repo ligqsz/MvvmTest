@@ -1,4 +1,4 @@
-package com.pax.app.rx;
+package com.pax.mvvm.rx;
 
 import io.reactivex.subscribers.DisposableSubscriber;
 
@@ -6,7 +6,8 @@ import io.reactivex.subscribers.DisposableSubscriber;
  * @author ligq
  * @date 2018/11/7 14:54
  */
-public abstract class RxSubscriber<T> extends DisposableSubscriber<T> {
+@SuppressWarnings({"WeakerAccess", "unused"})
+public abstract class BaseRxSubscriber<T> extends DisposableSubscriber<T> {
 
     @Override
     protected void onStart() {

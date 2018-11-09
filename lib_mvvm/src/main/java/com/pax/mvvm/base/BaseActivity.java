@@ -1,4 +1,4 @@
-package com.pax.app;
+package com.pax.mvvm.base;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -10,10 +10,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.pax.app.constant.States;
-import com.pax.app.event.LiveBus;
-import com.pax.app.utils.TUtil;
-import com.pax.app.vm.BaseViewModel;
+import com.pax.mvvm.constants.Const;
+import com.pax.mvvm.event.LiveBus;
+import com.pax.mvvm.utils.TUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,39 +26,7 @@ public abstract class BaseActivity<V extends BaseViewModel, B extends ViewDataBi
     protected V mViewModel;
     protected B mDataBinding;
     protected List<Object> events;
-    protected Observer observer = new Observer<Integer>() {
-        @Override
-        public void onChanged(@Nullable Integer integer) {
-            if (integer == null) {
-                showError();
-                return;
-            }
-            if (States.SUCCESS == integer) {
-                showSuccess();
-            } else if (integer == States.FAILED) {
-                showFailed();
-            } else if (integer == States.LOADING) {
-                showLoading();
-            } else if (integer != States.ERROR) {
-                showElse(integer);
-            } else {
-                showError();
-            }
-        }
-    };
-
-    protected abstract void showLoading();
-
-    @SuppressWarnings("unused")
-    protected void showElse(Integer integer) {
-
-    }
-
-    protected abstract void showError();
-
-    protected abstract void showFailed();
-
-    protected abstract void showSuccess();
+    protected Observer observer;
 
     @SuppressWarnings("unchecked")
     @Override
@@ -68,8 +35,9 @@ public abstract class BaseActivity<V extends BaseViewModel, B extends ViewDataBi
         mDataBinding = DataBindingUtil.setContentView(this, getLayoutId());
         events = new ArrayList<>();
         mViewModel = vmProviders(this, (Class<V>) TUtil.getInstance(this, 0));
+        observer = getObserver();
         Log.i(TAG, "onCreate: mViewModel=" + mViewModel);
-        if (mViewModel != null) {
+        if (mViewModel != null && observer != null) {
             Object stateEventKey = getStateEventKey();
             String stateEventTag = getStateEventTag();
             events.add(stateEventKey + stateEventTag);
@@ -77,13 +45,27 @@ public abstract class BaseActivity<V extends BaseViewModel, B extends ViewDataBi
         }
     }
 
+    /**
+     * get observer
+     *
+     * @return observer
+     */
+    protected abstract Observer getObserver();
+
+    /**
+     * layout id
+     *
+     * @return layout id
+     */
     protected abstract int getLayoutId();
 
     protected String getStateEventTag() {
-        return "";
+        return Const.STR_EMPTY;
     }
 
-    protected abstract Object getStateEventKey();
+    protected Object getStateEventKey() {
+        return getClass().getSimpleName();
+    }
 
 
     @SuppressWarnings("unchecked")

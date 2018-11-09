@@ -1,6 +1,6 @@
-package com.pax.app.repository;
+package com.pax.mvvm.base;
 
-import com.pax.app.event.LiveBus;
+import com.pax.mvvm.event.LiveBus;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -9,6 +9,7 @@ import io.reactivex.disposables.Disposable;
  * @author ligq
  * @date 2018/11/7 13:43
  */
+@SuppressWarnings({"unused", "WeakerAccess", "SameParameterValue"})
 public class BaseRepository {
     private CompositeDisposable mCompositeDisposable;
 

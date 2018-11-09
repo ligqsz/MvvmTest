@@ -1,4 +1,4 @@
-package com.pax.app.rx;
+package com.pax.mvvm.rx;
 
 import io.reactivex.observers.DisposableObserver;
 
@@ -6,7 +6,8 @@ import io.reactivex.observers.DisposableObserver;
  * @author ligq
  * @date 2018/11/7 14:54
  */
-public abstract class RxObservable<T> extends DisposableObserver<T> {
+@SuppressWarnings({"WeakerAccess", "unused"})
+public abstract class BaseRxObservable<T> extends DisposableObserver<T> {
 
     @Override
     protected void onStart() {

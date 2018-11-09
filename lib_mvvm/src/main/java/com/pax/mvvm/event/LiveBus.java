@@ -1,4 +1,4 @@
-package com.pax.app.event;
+package com.pax.mvvm.event;
 
 
 import android.arch.lifecycle.LifecycleOwner;
@@ -11,8 +11,7 @@ import android.text.TextUtils;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static com.pax.app.utils.TUtil.checkNotNull;
-
+import static com.pax.mvvm.utils.TUtil.checkNotNull;
 
 /**
  * 事件总线

@@ -1,11 +1,10 @@
-package com.pax.app.vm;
+package com.pax.mvvm.base;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.support.annotation.NonNull;
 
-import com.pax.app.repository.BaseRepository;
-import com.pax.app.utils.TUtil;
+import com.pax.mvvm.utils.TUtil;
 
 /**
  * @author ligq
