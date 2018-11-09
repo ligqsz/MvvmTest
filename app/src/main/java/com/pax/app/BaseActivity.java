@@ -22,9 +22,9 @@ import java.util.List;
  * @author ligq
  * @date 2018/11/7 13:51
  */
-public abstract class BaseActivity<T extends BaseViewModel, B extends ViewDataBinding> extends AppCompatActivity {
+public abstract class BaseActivity<V extends BaseViewModel, B extends ViewDataBinding> extends AppCompatActivity {
     private static final String TAG = "test";
-    protected T mViewModel;
+    protected V mViewModel;
     protected B mDataBinding;
     protected List<Object> events;
     protected Observer observer = new Observer<Integer>() {
@@ -67,7 +67,7 @@ public abstract class BaseActivity<T extends BaseViewModel, B extends ViewDataBi
         super.onCreate(savedInstanceState);
         mDataBinding = DataBindingUtil.setContentView(this, getLayoutId());
         events = new ArrayList<>();
-        mViewModel = vmProviders(this, (Class<T>) TUtil.getInstance(this, 0));
+        mViewModel = vmProviders(this, (Class<V>) TUtil.getInstance(this, 0));
         Log.i(TAG, "onCreate: mViewModel=" + mViewModel);
         if (mViewModel != null) {
             Object stateEventKey = getStateEventKey();
@@ -87,7 +87,17 @@ public abstract class BaseActivity<T extends BaseViewModel, B extends ViewDataBi
 
 
     @SuppressWarnings("unchecked")
-    protected T vmProviders(AppCompatActivity activity, @NonNull Class modelClass) {
-        return (T) ViewModelProviders.of(activity).get(modelClass);
+    protected V vmProviders(AppCompatActivity activity, @NonNull Class modelClass) {
+        return (V) ViewModelProviders.of(activity).get(modelClass);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (!events.isEmpty()) {
+            for (Object event : events) {
+                LiveBus.getDefault().clear(event);
+            }
+        }
     }
 }

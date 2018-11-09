@@ -1,6 +1,5 @@
 package com.pax.app.repository;
 
-import android.arch.persistence.room.Room;
 import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Log;
@@ -8,10 +7,10 @@ import android.util.Log;
 import com.pax.app.constant.Constants;
 import com.pax.app.constant.States;
 import com.pax.app.db.BaseDatabase;
+import com.pax.app.db.DataBaseUtils;
 import com.pax.app.db.User;
 import com.pax.app.rx.RxObservable;
 import com.pax.app.rx.RxSchedulers;
-import com.pax.app.utils.Utils;
 
 import java.util.List;
 import java.util.Random;
@@ -45,7 +44,7 @@ public class LoginRepository extends BaseRepository {
         Observable<Integer> insertDb = Observable.create(new ObservableOnSubscribe<Integer>() {
             @Override
             public void subscribe(ObservableEmitter<Integer> emitter) {
-                BaseDatabase db = Room.databaseBuilder(Utils.getApp(), BaseDatabase.class, "test_db").build();
+                BaseDatabase db = DataBaseUtils.getDataBase(BaseDatabase.class, "test_db");
                 User user = new User(username, pwd);
                 db.userDao().insertAll(user);
                 emitter.onComplete();
@@ -106,8 +105,7 @@ public class LoginRepository extends BaseRepository {
         addDisposable(Observable.create(new ObservableOnSubscribe<List<User>>() {
             @Override
             public void subscribe(ObservableEmitter<List<User>> emitter) {
-                List<User> all = Room.databaseBuilder(Utils.getApp(), BaseDatabase.class, "test_db")
-                        .build()
+                List<User> all = DataBaseUtils.getDataBase(BaseDatabase.class, "test_db")
                         .userDao()
                         .getAll();
                 emitter.onNext(all);

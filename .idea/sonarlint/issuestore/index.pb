@@ -49,3 +49,17 @@ Z
 *app/src/main/java/com/pax/app/db/User.java,c\6\c634ddd2d96e380876815ab913f5d19818838c4d
 <
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
+A
+gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4
+³
+‚app/build/generated/data_binding_base_class_source_out/debug/dataBindingGenBaseClassesDebug/out/com/pax/mvvmtest/LoginBinding.java,c\7\c7c70fa0e4006413d5af9aa3e25c8777eabcf5a3
+˜
+happ/build/generated/not_namespaced_r_class_sources/debug/processDebugResources/r/com/pax/mvvmtest/R.java,b\1\b18ee3d2b5a36967b23e82d8775e3f3a4da13519
+S
+#.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
+u
+Eapp/build/generated/source/apt/debug/com/pax/app/db/UserDao_Impl.java,8\8\887bdd4b707f7b32625b74997d66ecbd2e8addd2
+z
+Japp/build/generated/source/apt/debug/com/pax/app/db/BaseDatabase_Impl.java,7\0\70bec6941236507242a9fffa10fa7ab117e4c01f
+c
+3app/src/main/java/com/pax/app/db/DataBaseUtils.java,8\6\86c5bb4e9e1bea240fc0b5795e2fa2c3f63c5d81
