@@ -6,4 +6,6 @@ package com.pax.mvvm.constants;
  */
 public class Const {
     public static final String STR_EMPTY = "";
+    public static final String STRING_END_HTTP = "<-- END HTTP";
+    public static final String STRING_POST = "--> POST";
 }
