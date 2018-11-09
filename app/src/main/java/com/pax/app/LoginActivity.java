@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.pax.app.constant.Constants;
 import com.pax.app.constant.States;
 import com.pax.app.vm.LoginViewModel;
-import com.pax.mvvm.base.BaseActivity;
+import com.pax.mvvm.base.BaseLifeActivity;
 import com.pax.mvvmtest.LoginBinding;
 import com.pax.mvvmtest.R;
 
@@ -22,7 +22,7 @@ import com.pax.mvvmtest.R;
  *
  * @author ligq
  */
-public class LoginActivity extends BaseActivity<LoginViewModel, LoginBinding> {
+public class LoginActivity extends BaseLifeActivity<LoginViewModel, LoginBinding> {
     public static final String TAG = "mvvm";
     public TextView.OnEditorActionListener onEditorActionListener = new TextView.OnEditorActionListener() {
         @Override

@@ -21,7 +21,7 @@ import java.util.List;
  * @author ligq
  * @date 2018/11/7 13:51
  */
-public abstract class BaseActivity<V extends BaseViewModel, B extends ViewDataBinding> extends AppCompatActivity {
+public abstract class BaseLifeActivity<V extends BaseViewModel, B extends ViewDataBinding> extends AppCompatActivity {
     private static final String TAG = "test";
     protected V mViewModel;
     protected B mDataBinding;
