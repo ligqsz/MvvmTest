@@ -1,6 +1,7 @@
 package com.pax.app;
 
 import android.arch.lifecycle.Observer;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -57,9 +58,8 @@ public class LoginActivity extends BaseLifeActivity<LoginViewModel, LoginBinding
     }
 
     protected void showSuccess() {
-        hideProgress();
-        showToast("success");
         doQueryAll();
+        startActivity(new Intent(this, SecondActivity.class));
     }
 
     private void doQueryAll() {
@@ -129,6 +129,12 @@ public class LoginActivity extends BaseLifeActivity<LoginViewModel, LoginBinding
 
     private void doLogin() {
         mViewModel.login(mDataBinding.email.getText().toString(), mDataBinding.password.getText().toString());
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        hideProgress();
     }
 
     private void hideProgress() {

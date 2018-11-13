@@ -17,7 +17,10 @@ public abstract class BaseBindingActivity<B extends ViewDataBinding> extends App
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mDataBinding = DataBindingUtil.setContentView(this, getLayoutId());
+        init();
     }
+
+    protected abstract void init();
 
     /**
      * layout id
@@ -25,4 +28,9 @@ public abstract class BaseBindingActivity<B extends ViewDataBinding> extends App
      * @return layout id
      */
     protected abstract int getLayoutId();
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

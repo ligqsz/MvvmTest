@@ -9,8 +9,10 @@ import com.pax.app.constant.States;
 import com.pax.app.db.BaseUserDb;
 import com.pax.app.db.DbUtils;
 import com.pax.app.db.User;
+import com.pax.app.db.UserDao;
 import com.pax.mvvm.base.BaseRepository;
 import com.pax.mvvm.rx.BaseRxObservable;
+import com.pax.mvvm.rx.RxEvent;
 import com.pax.mvvm.rx.RxSchedulers;
 
 import java.util.List;
@@ -47,7 +49,10 @@ public class LoginRepository extends BaseRepository {
             public void subscribe(ObservableEmitter<Integer> emitter) {
                 BaseUserDb db = DbUtils.getDataBase(BaseUserDb.class, "test_db");
                 User user = new User(username, pwd);
-                db.userDao().insertAll(user);
+                UserDao userDao = db.userDao();
+                if (userDao.findByName(username, pwd) == null) {
+                    userDao.insertAll(user);
+                }
                 emitter.onComplete();
             }
         });
@@ -103,7 +108,7 @@ public class LoginRepository extends BaseRepository {
     }
 
     public void queryAll() {
-        addDisposable(Observable.create(new ObservableOnSubscribe<List<User>>() {
+        Observable<List<User>> testDb = Observable.create(new ObservableOnSubscribe<List<User>>() {
             @Override
             public void subscribe(ObservableEmitter<List<User>> emitter) {
                 List<User> all = DbUtils.getDataBase(BaseUserDb.class, "test_db")
@@ -113,7 +118,9 @@ public class LoginRepository extends BaseRepository {
                 emitter.onComplete();
             }
         })
-                .compose(RxSchedulers.<List<User>>ioMain())
+                .compose(RxSchedulers.<List<User>>ioMain());
+        RxEvent.getDefault().post("TEST_DB", testDb);
+        addDisposable(testDb
                 .subscribeWith(new BaseRxObservable<List<User>>() {
                     @Override
                     protected void onSuccess(List<User> users) {

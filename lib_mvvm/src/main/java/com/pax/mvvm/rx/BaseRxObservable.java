@@ -1,5 +1,7 @@
 package com.pax.mvvm.rx;
 
+import android.util.Log;
+
 import io.reactivex.observers.DisposableObserver;
 
 /**
@@ -8,19 +10,17 @@ import io.reactivex.observers.DisposableObserver;
  */
 @SuppressWarnings({"WeakerAccess", "unused"})
 public abstract class BaseRxObservable<T> extends DisposableObserver<T> {
+    private static final String TAG = BaseRxObservable.class.getSimpleName();
 
     @Override
     protected void onStart() {
         super.onStart();
-        showLoading();
-    }
-
-    private void showLoading() {
-
+        Log.d(TAG, "onStart: ");
     }
 
     @Override
     public void onNext(T t) {
+        Log.d(TAG, "onNext: ");
         onSuccess(t);
     }
 
@@ -28,11 +28,11 @@ public abstract class BaseRxObservable<T> extends DisposableObserver<T> {
 
     @Override
     public void onError(Throwable t) {
-
+        Log.e(TAG, "onError: ", t);
     }
 
     @Override
     public void onComplete() {
-
+        Log.d(TAG, "onComplete: ");
     }
 }

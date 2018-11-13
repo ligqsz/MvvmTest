@@ -28,4 +28,7 @@ public interface UserDao {
 
     @Delete
     void delete(User user);
+
+    @Query("select * from user where first_name like :first")
+    User findByName(String first);
 }
