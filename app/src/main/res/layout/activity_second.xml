@@ -10,6 +10,14 @@
         <variable
             name="second"
             type="SecondActivity" />
+
+        <variable
+            name="first"
+            type="String" />
+
+        <variable
+            name="last"
+            type="String" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -30,6 +38,18 @@
             android:onClick="@{()->second.testClick()}"
             android:text="@{second.users}"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
+            android:text="@{@string/nameFormat(first,last)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

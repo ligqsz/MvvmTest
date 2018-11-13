@@ -4,6 +4,8 @@ import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -25,6 +27,8 @@ import com.pax.mvvmtest.R;
  */
 public class LoginActivity extends BaseLifeActivity<LoginViewModel, LoginBinding> {
     public static final String TAG = "mvvm";
+    public String username;
+    public String password;
     public TextView.OnEditorActionListener onEditorActionListener = new TextView.OnEditorActionListener() {
         @Override
         public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -59,6 +63,7 @@ public class LoginActivity extends BaseLifeActivity<LoginViewModel, LoginBinding
 
     protected void showSuccess() {
         doQueryAll();
+        hideProgress();
         startActivity(new Intent(this, SecondActivity.class));
     }
 
@@ -75,6 +80,23 @@ public class LoginActivity extends BaseLifeActivity<LoginViewModel, LoginBinding
             mDataBinding.email.requestFocus();
             mDataBinding.email.setError("invalid email!!!");
         }
+
+        mDataBinding.password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     @Override
@@ -129,12 +151,6 @@ public class LoginActivity extends BaseLifeActivity<LoginViewModel, LoginBinding
 
     private void doLogin() {
         mViewModel.login(mDataBinding.email.getText().toString(), mDataBinding.password.getText().toString());
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        hideProgress();
     }
 
     private void hideProgress() {

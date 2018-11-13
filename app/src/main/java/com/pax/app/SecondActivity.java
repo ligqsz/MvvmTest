@@ -2,11 +2,14 @@ package com.pax.app;
 
 import android.util.Log;
 
+import com.pax.app.db.User;
 import com.pax.mvvm.base.BaseBindingActivity;
 import com.pax.mvvm.listener.RxEventListener;
 import com.pax.mvvm.rx.RxEvent;
 import com.pax.mvvmtest.R;
 import com.pax.mvvmtest.databinding.ActivitySecondBinding;
+
+import java.util.List;
 
 /**
  * @author ligq
@@ -28,10 +31,14 @@ public class SecondActivity extends BaseBindingActivity<ActivitySecondBinding> i
         Log.e("Second", "testClick: ");
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void onSuccess(String key, Object object) {
+        List<User> userList = (List<User>) object;
         users = object.toString();
         mDataBinding.setSecond(this);
+        mDataBinding.setFirst(userList.get(0).firstName);
+        mDataBinding.setLast(userList.get(0).lastName);
     }
 
     @Override
