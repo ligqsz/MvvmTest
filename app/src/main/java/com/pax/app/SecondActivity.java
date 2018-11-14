@@ -1,6 +1,7 @@
 package com.pax.app;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.pax.app.db.User;
 import com.pax.mvvm.base.BaseBindingActivity;
@@ -15,11 +16,13 @@ import java.util.List;
  * @author ligq
  */
 public class SecondActivity extends BaseBindingActivity<ActivitySecondBinding> implements RxEventListener {
+    private static final String TAG = SecondActivity.class.getSimpleName();
     public String users;
 
     @Override
     protected void init() {
         RxEvent.getDefault().doEvent("TEST_DB", this);
+        RxEvent.getDefault().doEvent("TEST_DATA", this);
     }
 
     @Override
@@ -34,16 +37,15 @@ public class SecondActivity extends BaseBindingActivity<ActivitySecondBinding> i
     @SuppressWarnings("unchecked")
     @Override
     public void onSuccess(String key, Object object) {
-        List<User> userList = (List<User>) object;
-        users = object.toString();
-        mDataBinding.setSecond(this);
-        mDataBinding.setFirst(userList.get(0).firstName);
-        mDataBinding.setLast(userList.get(0).lastName);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        RxEvent.getDefault().unDisposable();
+        Log.d(TAG, "onSuccess: key=" + key);
+        if ("TEST_DB".equals(key)) {
+            List<User> userList = (List<User>) object;
+            users = object.toString();
+            mDataBinding.setSecond(this);
+            mDataBinding.setFirst(userList.get(0).firstName);
+            mDataBinding.setLast(userList.get(0).lastName);
+        } else if ("TEST_DATA".equals(key)) {
+            Toast.makeText(this, object.toString(), Toast.LENGTH_SHORT).show();
+        }
     }
 }

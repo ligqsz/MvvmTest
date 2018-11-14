@@ -91,3 +91,13 @@ n
 >lib_mvvm/src/main/java/com/pax/mvvm/base/BaseLifeActivity.java,8\3\83571c998647c74f542b8fe2898431d648915413
 d
 4lib_mvvm/src/main/java/com/pax/mvvm/utils/TUtil.java,b\6\b627d595e8a8fad0b601b4f5ddedb2ebfc072a5b
+q
+Alib_mvvm/src/main/java/com/pax/mvvm/listener/RxEventListener.java,a\0\a04d71910b4ddde99272266a3f85ce5f205b1e69
+c
+3lib_mvvm/src/main/java/com/pax/mvvm/rx/RxEvent.java,c\f\cf0931563721df69983a364d01bf5c724308eb8b
+[
++app/src/main/res/layout/activity_second.xml,e\e\ee7eb90ac1e8481c4edb1c2c70e9d3c85213a209
+a
+1app/src/main/java/com/pax/app/SecondActivity.java,5\5\55ce4a09aa7edd21e270d38572b802b7975e61df
+X
+(gradle/wrapper/gradle-wrapper.properties,f\b\fbe448ebfc3eb2d4e308f6b8b043666f5b57235e

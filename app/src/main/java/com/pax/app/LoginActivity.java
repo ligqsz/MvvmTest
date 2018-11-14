@@ -4,8 +4,6 @@ import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -17,6 +15,7 @@ import com.pax.app.constant.Constants;
 import com.pax.app.constant.States;
 import com.pax.app.vm.LoginViewModel;
 import com.pax.mvvm.base.BaseLifeActivity;
+import com.pax.mvvm.rx.RxEvent;
 import com.pax.mvvmtest.LoginBinding;
 import com.pax.mvvmtest.R;
 
@@ -27,7 +26,6 @@ import com.pax.mvvmtest.R;
  */
 public class LoginActivity extends BaseLifeActivity<LoginViewModel, LoginBinding> {
     public static final String TAG = "mvvm";
-    public String username;
     public String password;
     public TextView.OnEditorActionListener onEditorActionListener = new TextView.OnEditorActionListener() {
         @Override
@@ -80,23 +78,6 @@ public class LoginActivity extends BaseLifeActivity<LoginViewModel, LoginBinding
             mDataBinding.email.requestFocus();
             mDataBinding.email.setError("invalid email!!!");
         }
-
-        mDataBinding.password.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
     }
 
     @Override
@@ -141,6 +122,7 @@ public class LoginActivity extends BaseLifeActivity<LoginViewModel, LoginBinding
 
     private void initView() {
         mDataBinding.password.setOnEditorActionListener(onEditorActionListener);
+        RxEvent.getDefault().post("TEST_DATA", RxEvent.getDefault().createEventData("I am test data!!"));
     }
 
     public void onClick(View view) {
@@ -156,6 +138,12 @@ public class LoginActivity extends BaseLifeActivity<LoginViewModel, LoginBinding
     private void hideProgress() {
         mDataBinding.loginProgress.setVisibility(View.GONE);
         mDataBinding.loginForm.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RxEvent.getDefault().clear();
     }
 }
 
